@@ -1,0 +1,15 @@
+.main {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    width: 500px;
+    height: 500;
+    background: #d9dbda;
+    margin: 10px;
+
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
