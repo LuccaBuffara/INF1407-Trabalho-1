@@ -3,7 +3,9 @@
     <img src="images/screenshot.png">
   </a>
 </p>
+
 &nbsp;
+
 # T1 INF1407 Prog. Web
 Para esse primeiro trabalho foi desenvolvido um jogo da memória que pode ser jogado com 3,4 ou 5 peças diferentes. Ao entrar no link que contem o jogo o usuario deve inserir um email no formato priplanus: Ex.: \user[gmail]. O usuario tambem pode aumentar o numero de peças do jogo.
 
