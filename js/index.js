@@ -42,10 +42,8 @@ select = (x) => {
 
     //Verifica se peça ja foi selecionada
     if(x.classList.contains('flip')){
-        console.log("ja selecionada")
         return;
     }
-    console.log(x)
 
     x.classList.toggle("flip");
 
@@ -64,8 +62,6 @@ select = (x) => {
 
             //Verifica se peças sao iguais
             if (allEqual(selected_pieces)){
-
-                console.log("Nice!");
                 
                 //Marca peças como 'completed' para manter elas viradas
                 for(i=0;i<flippers.length;i++){
@@ -83,7 +79,7 @@ select = (x) => {
                 }
 
                 if(comp == 4){
-                    console.log("Jogo terminado!");
+                    alert("Jogo concluido!")
                 }
 
             }else{
@@ -106,9 +102,6 @@ select = (x) => {
 
             //Reseta array de peças selecionadas
             selected_pieces.length = 0;
-            
-            console.log(flippers)
-
             
         }
 
