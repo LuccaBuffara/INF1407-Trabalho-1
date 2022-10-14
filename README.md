@@ -7,36 +7,26 @@
 &nbsp;
 
 # T1 INF1407 Prog. Web
-Para esse primeiro trabalho foi desenvolvido um jogo da memória que pode ser jogado com 3,4 ou 5 peças diferentes. Ao entrar no link que contem o jogo o usuario deve inserir um email no formato priplanus: Ex.: \user[gmail]. O usuario tambem pode aumentar o numero de peças do jogo.
 
-## Other CodeSandbox repositories
+Para esse primeiro trabalho foi desenvolvido um jogo da memória que pode ser jogado com 3,4 ou 5 peças diferentes. 
 
-CodeSandbox consists of several separate servers, some of which are open
-sourced.
+## Como jogar 
 
-- Client: the web application
-- Server: the [Phoenix](https://github.com/phoenixframework/phoenix) API server
-- Nginx: Nginx config files
-- [Git Extractor](https://github.com/codesandbox/codesandbox-importers):
-  responsible for extracting the source from a GitHub repository
-- [CLI](https://github.com/codesandbox/codesandbox-importers/tree/master/packages/cli):
-  the CLI to upload a CodeSandbox project from your command line
+Ao entrar no link que contem o jogo o usuario deve inserir um email no formato priplanus: Ex.: \user[gmail]. O usuario tambem pode aumentar o numero de peças do jogo. Apos terminar o jogo o usuario pode recomecar o jogo novamente com o mesmo numero de peças. Para iniciar o jogo com um numero diferente de peças o usuario deve recarregar a pagina.
+
+Se o usuario errar o par em uma rodada o jogo ira esperar 2 segundos para virar as peças de cabeça para baixa novamente. Isso para dar tempo que o jogador consiga lembrar a posição das peças. Quando o usuario acerta um par as peças se mantem viradas para cima.
+
+## Pontos interessantes do funcionamento do jogo
+
+Inicialmente o jogo verifica se o email fornecido esta no formato Priplanus utilizando um regex que pode ser encontrado em js/index.js. 
+
+```js
+let email_regex = /^\\([a-zA-z])+\[(?:(?:\w+\|\w+)+|(?:\w+)+)+\]$/g
+```
+
+Ao iniciar o jogo o div de id='board' em index.html é populado com as peças do jogo. Cada peca é representada por um componente que poder ser encontrado como um comentario em js/index.js na função add piece. Este componente contem a imagem do cardback e da imagem forntal da peça. 
+
+A função principal que contem a maioria da logica do jogo é a select() que pode ser encontrada js/index.js. essa funcao é executada sempre que uma peça é selecionada.
+
+O jogo contem imagens na pasta images/ que sao utilizadas para as peças e um card back. Ao selecionar uma peça para ser revelada ocorre uma animação que vira a peça para cima. A mesma animacao ocorre quando a carta é virada para baixo.
   
-## Documentation
-You can find our documentation on our [website](https://codesandbox.io/docs/start)
-
-## Contributors ✨
-
-Thanks goes to these wonderful people
-([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
-
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-## Thanks
-
-<a href="https://www.chromaticqa.com/"><img src="https://cdn-images-1.medium.com/letterbox/147/36/50/50/1*oHHjTjInDOBxIuYHDY2gFA.png?source=logoAvatar-d7276495b101---37816ec27d7a" width="120"/></a>
-
-Thanks to [Chromatic](https://www.chromaticqa.com/) for providing the visual
-testing platform that helps us catch unexpected changes.
