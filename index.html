@@ -10,86 +10,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
-    <div id="mainDiv"></div>
-    
-    <div id="board" class="grid" style="display: none;">
+    <div id="mainDiv" class="main">
+      <h3>T1 Prog. Web: Jogo da memoria!</h3>
+      <label for='emailJogador'>Insira seu email:</label>
+      <input type='text' id='emailJogador'><br><br>
 
-      <div class="flip-container">
-        <div class="flipper"  onclick="select(this)">
-            <div class="front">
-              <img src="https://opengameart.org/sites/default/files/styles/medium/public/card%20back%20black.png" width="200" height="250">
-            </div>
-            <div class="back">
-              <img src="https://s1.static.brasilescola.uol.com.br/be/imagens/artes/monalisa1000.jpg" 
-              width="200" height="250" alt="mona_lisa">
-            </div>
-        </div>
-      </div>
-
-      <div class="flip-container">
-        <div class="flipper"  onclick="select(this)">
-            <div class="front">
-              <img src="https://opengameart.org/sites/default/files/styles/medium/public/card%20back%20black.png" width="200" height="250" onclick="select(this)">
-            </div>
-            <div class="back">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg/1280px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg" 
-              width="200" height="250" alt="van_gogh">
-            </div>
-        </div>
-      </div>
-
-      <div class="flip-container">
-        <div class="flipper"  onclick="select(this)">
-            <div class="front">
-              <img src="https://opengameart.org/sites/default/files/styles/medium/public/card%20back%20black.png" width="200" height="250"  onclick="select(this)">
-            </div>
-            <div class="back">
-              <img src="https://cdn.britannica.com/82/190482-050-33D2C4C5/Self-Portrait-canvas-Rembrandt-van-Rijn-Washington-DC.jpg" 
-              width="200" height="250" alt="rembrandt">
-            </div>
-        </div>
-      </div>
-
-      <div class="flip-container">
-        <div class="flipper"  onclick="select(this)">
-            <div class="front">
-              <img src="https://opengameart.org/sites/default/files/styles/medium/public/card%20back%20black.png" width="200" height="250"  onclick="select(this)">
-            </div>
-            <div class="back">
-              <img src="https://s1.static.brasilescola.uol.com.br/be/imagens/artes/monalisa1000.jpg" 
-              width="200" height="250" alt="mona_lisa">
-            </div>
-        </div>
-      </div>
-
-
-      <div class="flip-container">
-        <div class="flipper"  onclick="select(this)">
-            <div class="front">
-              <img src="https://opengameart.org/sites/default/files/styles/medium/public/card%20back%20black.png" width="200" height="250"  onclick="select(this)">
-            </div>
-            <div class="back">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg/1280px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg" 
-              width="200" height="250" alt="van_gogh">
-            </div>
-        </div>
-      </div>
-
-
-      <div class="flip-container">
-        <div class="flipper"  onclick="select(this)">
-            <div class="front">
-              <img src="https://opengameart.org/sites/default/files/styles/medium/public/card%20back%20black.png" width="200" height="250"  onclick="select(this)">
-            </div>
-            <div class="back">
-              <img src="https://cdn.britannica.com/82/190482-050-33D2C4C5/Self-Portrait-canvas-Rembrandt-van-Rijn-Washington-DC.jpg" 
-              width="200" height="250" alt="rembrandt">
-            </div>
-        </div>
-      </div>
-
-
+      <label for="cards">Numero de peças:</label>
+      <select name="cards"  id="cards">
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <input class='startButton' type='button' value='Jogar!' onclick=initGame()>
     </div>
+    
+    <div id="board" class="grid" style="display: none;"></div>
 
      <script src="js/index.js"></script>
   </body>

@@ -1,21 +1,26 @@
-var email = null;
+var images = [
+    'mona_lisa.jpg',
+    'monet.jpg',
+    'picasso.jpeg',
+    'rembrandt.jpg',
+    'van_gogh.jpg'
+]
 
-//Regez Priplanus
+var email = null;
+var num_pieces = 0;
+
+//Regex Priplanus
 let email_regex = /\\([a-zA-z])+\[(?:(?:\w+\|\w+)+|(?:\w+)+)+\]/g
 
-const selected_pieces = []//new Array(2);
+//Array para armazenar peças selecionadas
+const selected_pieces = []
 
+//Verifica se todos elementos em um array sao iguais
+//Utilizado para indicar que o jogo terminou
 const allEqual = (arr) => arr.every( v => v === arr[0] )
 
-createEmailInput = () => {
-    document.getElementById("mainDiv").innerHTML += "<h3>Bem vindo ao jogo da memoria!</h3>";
-    document.getElementById("mainDiv").innerHTML += "<label for='emailJogador'>Insira seu email:</label>";
-    document.getElementById("mainDiv").innerHTML += "<input type='text' id='emailJogador'><br><br>";
-    document.getElementById("mainDiv").innerHTML += "<input type='button' value='Jogar!' onclick=checkEmail()>";
-}
-
-cleanScreen = () => {
-    document.getElementById("mainDiv").innerHTML = '';
+hideMenu = () => {
+    document.getElementById("mainDiv").style = 'display: none;';
 }
 
 //Embaralha as imagens no grid
@@ -25,21 +30,43 @@ shuffle_board = (board) => {
     }
 }
 
+//Verifica se email esta no formato Priplanus
 checkEmail = () => {
     email = document.getElementById("emailJogador").value;
 
     if(email.match(email_regex)){
-        alert("Vamos jogar!");
-        init_jogo()
-    }else{
-        alert("Email invalido! Seu email deve estar no formato Priplanus: '\\usuario[domínio|domínio|...|domínio]'")
+        // alert("Vamos jogar!");
+        // init_jogo()
+        return 1;
     }
-
+    return 0;
 }
 
-init_jogo = () => {
-    cleanScreen();
+//Adciona o seguinte html do componente da imagem
+addPiece = (board, imgSrc) => {
+//     <div class="flip-container">
+//     <div class="flipper"  onclick="select(this)">
+//         <div class="front">
+//           <img src="images/card_back.png" width="200" height="250"  onclick="select(this)">
+//         </div>
+//         <div class="back">
+//           <img src="images/mona_lisa.jpg" 
+//           width="200" height="250">
+//         </div>
+//     </div>
+//   </div> 
+
+    board.innerHTML += '\n\n<div class="flip-container">\n<div class="flipper" onclick="select(this)">\n<div class="front">\n<img src="images/card_back.png" width="200" height="250">\n</div>\n<div class="back">\n<img src="images/' +imgSrc+'" width="200" height="250">\n</div>\n</div>\n</div>\n\n'
+}
+
+
+init_board = () => {
     let board = document.getElementById("board");
+
+    for(i=0; i<num_pieces;i++){
+        addPiece(board, images[i]);
+        addPiece(board, images[i]);
+    }
 
     shuffle_board(board);
     board.style = "";
@@ -58,6 +85,8 @@ reset_board = () => {
     shuffle_board(board);
 }
 
+//Ativada sempre que uma peça é selecionada
+//Funcao principal do jogo
 select = (x) => {
 
     //Verifica se peça ja foi selecionada
@@ -65,17 +94,19 @@ select = (x) => {
         return;
     }
 
-    console.log(selected_pieces.length)
-
-    //Apenas 2 podem estar selecionadas a qualquer momento
+    //Apenas 2 peças podem estar selecionadas
     if(selected_pieces.length > 1){
         return
     }
 
+    //Atributo de classe flip faz a imagem 'flipar'
     x.classList.toggle("flip");
 
     try {
-        let selected_piece = x.querySelector('.back').firstChild.nextSibling.alt;
+        //Seleciona a imagem que de fato foi selecionada
+        //Para comparacao se as imagens sao iguais escolhi utilizar o atributo src das imagens
+        //Ex: Peças da Mona Lisa tem src: images/mona_lisa.jpg
+        let selected_piece = x.querySelector('.back').firstChild.nextSibling.src;
         
         if(selected_pieces.length < 1){
 
@@ -87,13 +118,13 @@ select = (x) => {
 
             let flippers = document.getElementsByClassName("flipper");
 
-            //Verifica se peças sao iguais
+            //Verifica se peças sao iguais - se true usuario acertou o par
             if (allEqual(selected_pieces)){
                 
                 //Marca peças como 'completed' para manter elas viradas
                 for(i=0;i<flippers.length;i++){
                     if(flippers[i].classList.contains('flip')){
-                        flippers[i].classList.toggle('completed')
+                        flippers[i].classList.add('completed')
                     }
                 }
 
@@ -105,14 +136,18 @@ select = (x) => {
                     }
                 }
 
-                if(comp == 4){
+                //Termino do jogo
+                if(comp == num_pieces*2){
                     if(confirm("Jogo concluido! Deseja jogar novamente?")){
                         reset_board();  
                     }
                 }
                 selected_pieces.length = 0;
+
             }else{
-                //Espera 2 segundos e reseta board
+
+                //Espera 2 segundos e resetar board para que usuario possa memorizar a posicao da peça
+
                 setTimeout(function(){ 
                     //Reseta apenas as que nao possuem o valor 'completed'
                     for(i=0;i<flippers.length;i++){
@@ -121,29 +156,28 @@ select = (x) => {
                         }
                     }
                     
+                    //Reseta array de peças selecionadas
                     selected_pieces.length = 0;
 
                 }, 2000);
-            }
-
-            //Reseta array de peças selecionadas
-            
+            }            
         }
 
     } catch (error){
+        //Debug
         // console.log(error)
     }
-    
 }
-//Jogo inicio pede email e verifica se pode jogar
-//Inicializa as 6 pecas indicando suas posicoes imagens e
 
-main = () => {
-    if(email === null){
-        createEmailInput();
-    }else{
+initGame = () => {
 
+    num_pieces = document.getElementById("cards").value;
+
+    if(checkEmail()){
+        alert("Vamos jogar!");
+        hideMenu();
+        init_board();
+    }else{  
+        alert("Email invalido! Seu email deve estar no formato Priplanus: '\\usuario[domínio|domínio|...|domínio]'")
     }
 }
-
-main()
