@@ -6,7 +6,7 @@
 
 &nbsp;
 
-# T1 INF1407 Prog. Web
+# T1 INF1407 Prog. Web - Lucca Buffara de Almeida
 
 Para esse primeiro trabalho foi desenvolvido um jogo da memória que pode ser jogado com 3,4 ou 5 peças diferentes. 
 
