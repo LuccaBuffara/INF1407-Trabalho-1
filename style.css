@@ -17,7 +17,6 @@ label {
   color: white;
 }
 
-
 .grid {
   display: grid;
   gap: 1px;
@@ -29,7 +28,6 @@ div > div {
   background-color: rgb(255, 255, 255);
 }
 
-/* flip the pane when clicked */
 .flip-container .flipper.flip {
   transform: rotateY(180deg);
 }
@@ -39,14 +37,12 @@ div > div {
   height: 250px;
 }
 
-/* flip speed */
 .flipper {
   transition: 0.8s;
   transform-style: preserve-3d;
   position: relative;
 }
 
-/* hide back of pane during swap */
 .front, .back {
   backface-visibility: hidden;
   position: absolute;
@@ -54,13 +50,11 @@ div > div {
   left: 0;
 }
 
-/* front pane, placed above back */
 .front {
   z-index: 2;
   transform: rotateY(0deg);
 }
 
-/* back, initially hidden pane */
 .back {
   transform: rotateY(180deg);
   background-color: #fff;
