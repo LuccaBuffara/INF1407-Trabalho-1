@@ -10,7 +10,7 @@ var email = null;
 var num_pieces = 0;
 
 //Regex Priplanus
-let email_regex = /\\([a-zA-z])+\[(?:(?:\w+\|\w+)+|(?:\w+)+)+\]/g
+let email_regex = /^\\([a-zA-z])+\[(?:(?:\w+\|\w+)+|(?:\w+)+)+\]$/g
 
 //Array para armazenar peças selecionadas
 const selected_pieces = []
