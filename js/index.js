@@ -38,11 +38,31 @@ init_jogo = () => {
     board.style = "";
 }
 
+reset_board = () => {
+
+    let board = document.getElementById("board");
+    let flippers = document.getElementsByClassName("flipper");
+
+    for(i=0;i<flippers.length;i++){
+            flippers[i].classList.remove('completed')
+            flippers[i].classList.remove('flip')
+    }
+
+    shuffle_board(board);
+}
+
 select = (x) => {
 
     //Verifica se peça ja foi selecionada
     if(x.classList.contains('flip')){
         return;
+    }
+
+    console.log(selected_pieces.length)
+
+    //Apenas 2 podem estar selecionadas a qualquer momento
+    if(selected_pieces.length > 1){
+        return
     }
 
     x.classList.toggle("flip");
@@ -79,8 +99,13 @@ select = (x) => {
                 }
 
                 if(comp == 4){
-                    alert("Jogo concluido!")
+                    if(confirm("Jogo concluido! Deseja jogar novamente?")){
+                        reset_board();  
+                    }
+                    
                 }
+
+                selected_pieces.length = 0;
 
             }else{
                 
@@ -93,15 +118,13 @@ select = (x) => {
                             flippers[i].classList.toggle('flip')
                         }
                     }
-                }, 2000); 
+                    
+                    selected_pieces.length = 0;
 
-                //Reseta
-
-
+                }, 2000);
             }
 
             //Reseta array de peças selecionadas
-            selected_pieces.length = 0;
             
         }
 
