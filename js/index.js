@@ -11,25 +11,33 @@ cleanScreen = () => {
     document.getElementById("mainDiv").innerHTML = '';
 }
 
-checkEmail = () => {
-    email = document.getElementById("emailJogador").value;
-    alert("Vamos jogar!");
-    cleanScreen();
-}
-
-class Piece {
-    //imgSrc - imagem da peca
-    //pos - posicao no grid da peca
-    //itemClass - identificador pra saber a qual item a peca representa
-    constructor(imgSrc, pos, itemClass){
-        this.imgSrc = imgSrc;
-        this.pos = pos;
-        this.itemClass = itemClass;
+//Embaralha as imagens no grid
+shuffle_board = (board) => {
+    for (var i = board.children.length; i >= 0; i--) {
+        board.appendChild(board.children[Math.random() * i | 0]);
     }
 }
 
-//Jogo inicio pede email e verifica se pode jogar
+checkEmail = () => {
+    email = document.getElementById("emailJogador").value;
 
+    alert("Vamos jogar!");
+
+    init_jogo()
+}
+
+init_jogo = () => {
+    cleanScreen();
+    let board = document.getElementById("board");
+
+    shuffle_board(board);
+    board.style = "";
+}
+
+select = (x) => {
+    alert(x.alt);
+}
+//Jogo inicio pede email e verifica se pode jogar
 //Inicializa as 6 pecas indicando suas posicoes imagens e
 
 main = () => {
