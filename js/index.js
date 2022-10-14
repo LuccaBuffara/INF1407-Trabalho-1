@@ -1,5 +1,8 @@
 var email = null;
 
+//Regez Priplanus
+let email_regex = /\\([a-zA-z])+\[(?:(?:\w+\|\w+)+|(?:\w+)+)+\]/g
+
 const selected_pieces = []//new Array(2);
 
 const allEqual = (arr) => arr.every( v => v === arr[0] )
@@ -25,9 +28,13 @@ shuffle_board = (board) => {
 checkEmail = () => {
     email = document.getElementById("emailJogador").value;
 
-    alert("Vamos jogar!");
+    if(email.match(email_regex)){
+        alert("Vamos jogar!");
+        init_jogo()
+    }else{
+        alert("Email invalido! Seu email deve estar no formato Priplanus: '\\usuario[domínio|domínio|...|domínio]'")
+    }
 
-    init_jogo()
 }
 
 init_jogo = () => {
@@ -102,16 +109,11 @@ select = (x) => {
                     if(confirm("Jogo concluido! Deseja jogar novamente?")){
                         reset_board();  
                     }
-                    
                 }
-
                 selected_pieces.length = 0;
-
             }else{
-                
                 //Espera 2 segundos e reseta board
                 setTimeout(function(){ 
-                    
                     //Reseta apenas as que nao possuem o valor 'completed'
                     for(i=0;i<flippers.length;i++){
                         if(flippers[i].classList.contains('flip') && !flippers[i].classList.contains('completed')){
