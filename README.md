@@ -40,7 +40,7 @@ Ao iniciar o jogo o div de id='board' em index.html é populado com as peças do
   </div> 
 ```
 
-A função principal que contem a maioria da logica do jogo é a select() que pode ser encontrada js/index.js. essa funcao é executada sempre que uma peça é selecionada.
+A função principal que contem a maioria da logica do jogo é a select() que pode ser encontrada js/index.js. Essa funcao é executada sempre que uma peça é selecionada.
 
 O jogo contem imagens na pasta images/ que sao utilizadas para as peças e um card back. Ao selecionar uma peça para ser revelada ocorre uma animação que vira a peça para cima. A mesma animacao ocorre quando a carta é virada para baixo.
   
