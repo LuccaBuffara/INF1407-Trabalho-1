@@ -33,10 +33,7 @@ shuffle_board = (board) => {
 //Verifica se email esta no formato Priplanus
 checkEmail = () => {
     email = document.getElementById("emailJogador").value;
-
     if(email.match(email_regex)){
-        // alert("Vamos jogar!");
-        // init_jogo()
         return 1;
     }
     return 0;
